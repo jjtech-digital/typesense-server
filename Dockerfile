@@ -7,17 +7,15 @@ FROM typesense/typesense:30.1
 COPY --from=caddy /srv/Caddyfile ./
 COPY --from=caddy /usr/bin/caddy /usr/bin/caddy
 
-COPY --chmod=755 scripts/* ./
+RUN apt-get update && apt-get install -y --no-install-recommends gosu \
+    && rm -rf /var/lib/apt/lists/*
 
-# Create non-root user and set up data directory
+# Create non-root user
 RUN groupadd -r typesense && useradd -r -g typesense -d /data -s /sbin/nologin typesense \
     && mkdir -p /data \
-    && chown -R typesense:typesense /data \
-    && chown typesense:typesense /opt/typesense-server \
-    && chown typesense:typesense /*.sh \
-    && chown typesense:typesense /Caddyfile
+    && chown -R typesense:typesense /data
 
-USER typesense
+COPY --chmod=755 scripts/* ./
 
 ENTRYPOINT ["/bin/sh"]
 

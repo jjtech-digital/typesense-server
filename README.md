@@ -21,6 +21,7 @@ Internet → Railway ($PORT) → Caddy (reverse proxy) → Typesense (127.0.0.1:
 ├── Dockerfile                # Multi-stage Docker build
 ├── railway.json              # Railway infrastructure config (config-as-code)
 ├── railway.template.json     # Railway template for one-click deploy
+├── railway-variables.json    # Environment variables for quick setup via CLI
 └── scripts/
     ├── start.sh              # Entry point — runs Caddy & Typesense in parallel
     ├── start_caddy.sh        # Starts Caddy with the Caddyfile
@@ -51,6 +52,20 @@ Set the following environment variables in your Railway service settings:
 | `TYPESENSE_URL` | `http://${{RAILWAY_PRIVATE_DOMAIN}}:${{PORT}}` | Internal URL for service-to-service communication |
 
 > **Note:** `RAILWAY_VOLUME_MOUNT_PATH`, `RAILWAY_PUBLIC_DOMAIN`, and `RAILWAY_PRIVATE_DOMAIN` are automatically provided by Railway. Use Railway's variable reference syntax `${{VAR}}` to reference them.
+
+All variables are pre-defined in `railway-variables.json` for quick setup. You can bulk-import them using the Railway CLI:
+
+```bash
+# Link to your Railway project first
+railway link
+
+# Set all variables at once
+cat railway-variables.json | jq -r 'to_entries[] | "\(.key)=\(.value)"' | while read var; do
+  railway variables set "$var"
+done
+```
+
+> **Important:** Replace `CHANGE_ME_GENERATE_A_SECURE_KEY` in `railway-variables.json` with a secure API key before importing.
 
 ## Railway Config-as-Code
 

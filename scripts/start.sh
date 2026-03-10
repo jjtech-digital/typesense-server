@@ -1,7 +1,8 @@
 #!/bin/sh
 
-parallel --ungroup --halt now,done=1 ::: \
-    "./start_caddy.sh" \
-    "./start_typesense.sh"
+./start_caddy.sh &
+./start_typesense.sh &
 
-false
+# Wait for either process to exit, then stop all
+wait -n 2>/dev/null || wait
+kill 0

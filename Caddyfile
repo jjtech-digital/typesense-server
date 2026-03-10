@@ -11,5 +11,20 @@
 
 # site block, listens on the $PORT environment variable, automatically assigned by railway
 :{$PORT} {
+	# Security headers
+	header {
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		-Server
+	}
+
+	# Limit request body size to 100MB
+	request_body {
+		max_size 100MB
+	}
+
 	reverse_proxy http://127.0.0.1:8118
 }

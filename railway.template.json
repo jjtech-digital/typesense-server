@@ -60,6 +60,26 @@
           "description": "Internal URL for service-to-service communication within Railway",
           "default": "http://${{RAILWAY_PRIVATE_DOMAIN}}:${{PORT}}",
           "required": false
+        },
+        "BACKUP_ENABLED": {
+          "description": "Enable automated periodic backups (true/false)",
+          "default": "true",
+          "required": false
+        },
+        "BACKUP_INTERVAL_HOURS": {
+          "description": "Hours between automated backups",
+          "default": "6",
+          "required": false
+        },
+        "BACKUP_RETENTION_DAYS": {
+          "description": "Number of days to retain old backups",
+          "default": "7",
+          "required": false
+        },
+        "BACKUP_MAX_COUNT": {
+          "description": "Maximum number of backup snapshots to keep",
+          "default": "10",
+          "required": false
         }
       },
       "volumes": [

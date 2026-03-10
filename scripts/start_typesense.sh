@@ -5,4 +5,6 @@ exec /opt/typesense-server \
     --api-key="${TYPESENSE_API_KEY}" \
     --api-address 127.0.0.1 \
     --api-port 8118 \
-    --enable-cors
+    --enable-cors \
+    --enable-search-analytics=true \
+    --analytics-flush-interval=60

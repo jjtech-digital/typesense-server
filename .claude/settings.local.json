@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:docs.railway.com)",
+      "WebFetch(domain:railway.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:railway.app)"
+    ]
+  }
+}

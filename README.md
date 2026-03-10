@@ -143,7 +143,6 @@ Once running, the Typesense API is available at `http://localhost:8080`.
 ## Security
 
 - **Non-root container** — The container runs as a dedicated `typesense` user, not `root`.
-- **`cap_net_bind_service`** — Caddy is granted only the minimum capability needed to bind to low-numbered ports.
 - **Loopback-only Typesense** — The Typesense API binds to `127.0.0.1`, inaccessible from outside the container. All external traffic goes through Caddy.
 - **Admin API disabled** — Caddy's admin API is turned off to prevent unauthorized configuration changes.
 

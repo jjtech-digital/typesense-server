@@ -19,8 +19,7 @@ RUN groupadd -r typesense && useradd -r -g typesense -d /data -s /sbin/nologin t
     && chown -R typesense:typesense /data \
     && chown typesense:typesense /opt/typesense-server \
     && chown typesense:typesense /*.sh \
-    && chown typesense:typesense /Caddyfile \
-    && setcap 'cap_net_bind_service=+ep' /usr/bin/caddy
+    && chown typesense:typesense /Caddyfile
 
 USER typesense
 
